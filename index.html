@@ -42,12 +42,22 @@
     <section class="card">
       <h3>Wat neem je mee?</h3>
       <p class="muted">Kies een hapje uit de lijst of voeg zelf iets toe. Zo houden we samen het overzicht.</p>
-      <form id="snackForm">
-        <label for="snackGuest">Jouw naam</label><select id="snackGuest" required><option value="">Kies je naam</option></select>
-        <label for="snackName">Hapje</label><input id="snackName" maxlength="100" required placeholder="Bijvoorbeeld: gevulde eitjes">
-        <button class="wide" type="submit">Hapje toevoegen</button>
-        <div id="snackStatus" class="status" role="status"></div>
-      </form>
+      
+<form id="snackForm">
+  <label for="snackGuest">Jouw naam</label>
+  <select id="snackGuest" required>
+    <option value="">Kies je naam</option>
+  </select>
+
+  <label for="snackSlot">Welk hapje neem je mee?</label>
+  <select id="snackSlot" required>
+    <option value="">Kies een beschikbaar hapje</option>
+  </select>
+
+  <button class="wide" type="submit">Deze plek reserveren</button>
+  <div id="snackStatus" class="status" role="status"></div>
+</form>
+
     </section>
   </main>
 
