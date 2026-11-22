@@ -98,13 +98,26 @@
   const msg = (id, text) => { $(id).textContent = text; };
   let guests = [], snackSlots = [];
 
-  async function loadData() {
-    if (!configured) {
-      msg("rsvpStatus","De website moet nog aan Supabase gekoppeld worden.");
-      $("guestList").innerHTML = '<p class="muted">Nog niet gekoppeld aan de database.</p>';
-      $("snackList").innerHTML = '<p class="muted">Nog niet gekoppeld aan de database.</p>';
-      return;
-    }
+async function loadData() {
+  const [g, s] = await Promise.all([
+    client.from("guests")
+      .select("id,name,party_size,attending,created_at")
+      .order("created_at"),
+    client.from("snack_slots")
+      .select("id,item_name,quantity,slot_number,guest_id,created_at")
+      .order("item_name")
+      .order("slot_number")
+  ]);
+
+  if (g.error || s.error) {
+    console.error(g.error || s.error);
+    return;
+  }
+
+  guests = g.data || [];
+  snackSlots = s.data || [];
+  render();
+}
     const [g,s] = await Promise.all([
       client.from("guests").select("id,name,party_size,attending,created_at").order("created_at"),
       client.from("snacks").select("id,name,guest_id,created_at").order("created_at")
