@@ -99,11 +99,17 @@
       client.from("guests").select("id,name,party_size,attending,created_at").order("created_at"),
       client.from("snacks").select("id,name,guest_id,created_at").order("created_at")
     ]);
-    if (g.error || s.error) {
-      $("guestList").textContent = "Laden mislukt. Controleer de Supabase-instellingen.";
-      $("snackList").textContent = "Laden mislukt. Controleer de Supabase-instellingen.";
-      console.error(g.error, s.error); return;
-    }
+if (g.error || s.error) {
+  const details = [g.error, s.error]
+    .filter(Boolean)
+    .map(e => `${e.code || ""} ${e.message || e}`.trim())
+    .join(" | ");
+
+  $("guestList").textContent = "Databasefout: " + details;
+  $("snackList").textContent = "Databasefout: " + details;
+  console.error(g.error, s.error);
+  return;
+}
     guests = g.data || []; snacks = s.data || [];
     render();
   }
