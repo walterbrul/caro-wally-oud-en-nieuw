@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="nl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#101010">
+  <title>Oud & Nieuw met Caro & Wally</title>
+  <style>
+    :root{--bg:#101010;--panel:#1b1a17;--gold:#d9b86c;--gold2:#f4dfaa;--muted:#c7c0b1;--line:#51452d}
+    *{box-sizing:border-box} body{margin:0;background:radial-gradient(ellipse at top,#302719 0,#101010 58%);color:#f8f3e8;font-family:Arial,Helvetica,sans-serif;line-height:1.5}
+    .wrap{max-width:920px;margin:auto;padding:24px 16px 60px}.hero{text-align:center;padding:36px 18px 28px;border:1px solid var(--line);border-radius:22px;background:linear-gradient(145deg,#171510,#090909);box-shadow:0 18px 60px #0008}
+    .eyebrow{letter-spacing:.24em;text-transform:uppercase;color:var(--gold);font-size:.75rem}.hero h1{font-family:Georgia,serif;color:var(--gold2);font-size:clamp(2.3rem,8vw,4.6rem);line-height:1.05;margin:12px 0}.hero h2{font-family:Georgia,serif;color:var(--gold);font-size:1.5rem;font-weight:normal;margin:0 0 14px}.hero p{margin:6px;color:#eee5d2}.spark{font-size:2rem;margin:12px}
+    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;margin-top:18px}.card{background:#191815;border:1px solid var(--line);border-radius:18px;padding:20px;box-shadow:0 10px 30px #0005}.card h3{color:var(--gold2);font-family:Georgia,serif;font-size:1.45rem;margin:0 0 12px}
+    label{display:block;color:var(--muted);font-size:.9rem;margin:12px 0 5px}input,select,button{font:inherit}input,select{width:100%;padding:12px;border-radius:10px;border:1px solid #655638;background:#0f0e0c;color:#fff}button{border:0;border-radius:10px;padding:12px 16px;background:linear-gradient(135deg,#f0d99e,#b58b3e);color:#17120a;font-weight:bold;cursor:pointer;margin-top:12px}button.secondary{background:#302a1d;color:#f4dfaa;border:1px solid var(--line)}button:disabled{opacity:.5;cursor:wait}.wide{width:100%}.muted{color:var(--muted);font-size:.9rem}.status{margin-top:10px;min-height:1.4em;color:var(--gold2)}ul{padding-left:20px}.list{display:grid;gap:8px}.item{padding:10px 12px;border-radius:10px;background:#11100e;border:1px solid #393124}.item strong{color:var(--gold2)}.pill{display:inline-block;border:1px solid var(--line);border-radius:30px;padding:3px 9px;color:var(--gold);font-size:.8rem;margin-left:6px}.admin{margin-top:20px}.hidden{display:none!important}.footer{text-align:center;color:#9d927e;font-size:.8rem;margin-top:24px}a{color:var(--gold2)}
+  </style>
+</head>
+<body>
+<div class="wrap">
+  <header class="hero">
+    <div class="eyebrow">Samen het nieuwe jaar in</div>
+    <div class="spark">✦ ✧ ✦</div>
+    <h1>Oud &amp; Nieuw</h1>
+    <h2>met Caro &amp; Wally</h2>
+    <p><strong>Bij Sbit</strong> · bij Wally op z'n werk</p>
+    <p>Oostbaan 1120, 2841ML Moordrecht</p>
+    <p>Aanvang 20:00 uur</p>
+    <div class="spark">✧ 🥂 ✧</div>
+  </header>
+
+  <main class="grid">
+    <section class="card">
+      <h3>Kom je ook?</h3>
+      <p class="muted">Vul je naam en het aantal personen in. Kun je toch niet komen? Laat het dan aan Caro &amp; Wally weten.</p>
+      <form id="rsvpForm">
+        <label for="guestName">Naam</label><input id="guestName" maxlength="100" required placeholder="Je naam">
+        <label for="partySize">Aantal personen</label><input id="partySize" type="number" min="1" max="20" value="1" required>
+        <button class="wide" type="submit">Ja, ik kom!</button>
+        <div id="rsvpStatus" class="status" role="status"></div>
+      </form>
+    </section>
+
+    <section class="card">
+      <h3>Wat neem je mee?</h3>
+      <p class="muted">Kies een hapje uit de lijst of voeg zelf iets toe. Zo houden we samen het overzicht.</p>
+      <form id="snackForm">
+        <label for="snackGuest">Jouw naam</label><select id="snackGuest" required><option value="">Kies je naam</option></select>
+        <label for="snackName">Hapje</label><input id="snackName" maxlength="100" required placeholder="Bijvoorbeeld: gevulde eitjes">
+        <button class="wide" type="submit">Hapje toevoegen</button>
+        <div id="snackStatus" class="status" role="status"></div>
+      </form>
+    </section>
+  </main>
+
+  <section class="card" style="margin-top:16px">
+    <h3>Wie zijn erbij?</h3><div id="guestList" class="list"><p class="muted">Lijst wordt geladen…</p></div>
+  </section>
+  <section class="card" style="margin-top:16px">
+    <h3>De hapjeslijst</h3><div id="snackList" class="list"><p class="muted">Lijst wordt geladen…</p></div>
+  </section>
+
+  <section class="card admin">
+    <h3>Beheer Caro &amp; Wally <span class="pill">privé</span></h3>
+    <p class="muted">Alleen voor organisatoren. Log in met het beheerdersaccount dat je in Supabase aanmaakt.</p>
+    <form id="loginForm">
+      <label for="adminEmail">E-mailadres beheerder</label><input id="adminEmail" type="email" required autocomplete="username">
+      <label for="adminPassword">Wachtwoord</label><input id="adminPassword" type="password" required autocomplete="current-password">
+      <button type="submit">Inloggen</button>
+      <button type="button" class="secondary hidden" id="logoutBtn">Uitloggen</button>
+      <div id="loginStatus" class="status" role="status"></div>
+    </form>
+    <div id="adminPanel" class="hidden">
+      <p class="muted">Beheerdersacties: verwijder foutieve aanmeldingen of hapjes.</p>
+      <div id="adminGuestList" class="list"></div>
+      <h3 style="margin-top:18px">Hapjes beheren</h3><div id="adminSnackList" class="list"></div>
+    </div>
+  </section>
+  <p class="footer">Een feestelijke avond gewenst! ✨</p>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+  // Vul hier jullie Supabase Project URL en Publishable key in.
+  const SUPABASE_URL = "VUL_HIER_JULLIE_PROJECT_URL_IN";
+  const SUPABASE_ANON_KEY = "VUL_HIER_JULLIE_PUBLISHABLE_KEY_IN";
+  const configured = !SUPABASE_URL.includes("VUL_HIER") && !SUPABASE_ANON_KEY.includes("VUL_HIER");
+  const client = configured ? window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY) : null;
+  const $ = id => document.getElementById(id);
+  const msg = (id, text) => { $(id).textContent = text; };
+  let guests = [], snacks = [];
+
+  async function loadData() {
+    if (!configured) {
+      msg("rsvpStatus","De website moet nog aan Supabase gekoppeld worden.");
+      $("guestList").innerHTML = '<p class="muted">Nog niet gekoppeld aan de database.</p>';
+      $("snackList").innerHTML = '<p class="muted">Nog niet gekoppeld aan de database.</p>';
+      return;
+    }
+    const [g,s] = await Promise.all([
+      client.from("guests").select("id,name,party_size,attending,created_at").order("created_at"),
+      client.from("snacks").select("id,name,guest_id,created_at").order("created_at")
+    ]);
+    if (g.error || s.error) {
+      $("guestList").textContent = "Laden mislukt. Controleer de Supabase-instellingen.";
+      $("snackList").textContent = "Laden mislukt. Controleer de Supabase-instellingen.";
+      console.error(g.error, s.error); return;
+    }
+    guests = g.data || []; snacks = s.data || [];
+    render();
+  }
+  function render() {
+    const attending = guests.filter(x => x.attending !== false);
+    $("guestList").innerHTML = attending.length ? attending.map(x =>
+      `<div class="item"><strong>${escapeHtml(x.name)}</strong> <span class="pill">${x.party_size} ${x.party_size===1?"persoon":"personen"}</span></div>`
+    ).join("") : '<p class="muted">Er zijn nog geen aanmeldingen.</p>';
+    $("snackGuest").innerHTML = '<option value="">Kies je naam</option>' + attending.map(x =>
+      `<option value="${x.id}">${escapeHtml(x.name)}</option>`).join("");
+    $("snackList").innerHTML = snacks.length ? snacks.map(x => {
+      const guest = guests.find(g => g.id === x.guest_id);
+      return `<div class="item"><strong>${escapeHtml(x.name)}</strong>${guest ? ` <span class="muted">— ${escapeHtml(guest.name)}</span>` : ""}</div>`;
+    }).join("") : '<p class="muted">Er zijn nog geen hapjes gekozen.</p>';
+    if (client && client.auth) renderAdmin();
+  }
+  function escapeHtml(value) {
+    return String(value ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+  }
+  $("rsvpForm").addEventListener("submit", async e => {
+    e.preventDefault(); if (!client) return msg("rsvpStatus","De database is nog niet gekoppeld.");
+    const name = $("guestName").value.trim(), party_size = Number($("partySize").value);
+    if (!name || !Number.isInteger(party_size) || party_size < 1 || party_size > 20) return msg("rsvpStatus","Vul een naam en een aantal tussen 1 en 20 in.");
+    const {error} = await client.from("guests").insert({name, party_size, attending:true});
+    msg("rsvpStatus", error ? "Aanmelden is niet gelukt. Probeer het opnieuw." : "Bedankt! Jullie aanmelding is ontvangen. 🎉");
+    if (!error) { $("rsvpForm").reset(); $("partySize").value=1; await loadData(); }
+  });
+  $("snackForm").addEventListener("submit", async e => {
+    e.preventDefault(); if (!client) return msg("snackStatus","De database is nog niet gekoppeld.");
+    const guest_id = $("snackGuest").value, name = $("snackName").value.trim();
+    if (!guest_id || !name) return msg("snackStatus","Kies je naam en vul een hapje in.");
+    const {error} = await client.from("snacks").insert({name, guest_id});
+    msg("snackStatus", error ? "Toevoegen is niet gelukt. Probeer het opnieuw." : "Dank je! Het hapje staat op de lijst. 🥂");
+    if (!error) { $("snackName").value=""; await loadData(); }
+  });
+  async function renderAdmin() {
+    const {data:{session}} = await client.auth.getSession();
+    $("adminPanel").classList.toggle("hidden", !session);
+    $("logoutBtn").classList.toggle("hidden", !session);
+    $("adminGuestList").innerHTML = guests.map(x => `<div class="item">${escapeHtml(x.name)} · ${x.party_size} pers. <button class="secondary" onclick="deleteGuest('${x.id}')">Verwijderen</button></div>`).join("");
+    $("adminSnackList").innerHTML = snacks.map(x => `<div class="item">${escapeHtml(x.name)} <button class="secondary" onclick="deleteSnack('${x.id}')">Verwijderen</button></div>`).join("");
+  }
+  $("loginForm").addEventListener("submit", async e => {
+    e.preventDefault(); if (!client) return;
+    const {error} = await client.auth.signInWithPassword({email:$("adminEmail").value,password:$("adminPassword").value});
+    msg("loginStatus", error ? "Inloggen mislukt. Controleer e-mail en wachtwoord." : "Je bent ingelogd.");
+    await renderAdmin();
+  });
+  $("logoutBtn").addEventListener("click", async () => { await client.auth.signOut(); msg("loginStatus","Je bent uitgelogd."); await renderAdmin(); });
+  window.deleteGuest = async id => { if (!confirm("Deze aanmelding verwijderen?")) return; const {error}=await client.from("guests").delete().eq("id",id); if(error) alert("Verwijderen mislukt."); await loadData(); };
+  window.deleteSnack = async id => { if (!confirm("Dit hapje verwijderen?")) return; const {error}=await client.from("snacks").delete().eq("id",id); if(error) alert("Verwijderen mislukt."); await loadData(); };
+  loadData();
+</script>
+</body>
+</html>
