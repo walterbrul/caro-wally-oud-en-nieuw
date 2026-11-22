@@ -96,7 +96,7 @@
   const client = configured ? window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY) : null;
   const $ = id => document.getElementById(id);
   const msg = (id, text) => { $(id).textContent = text; };
-  let guests = [], snacks = [];
+  let guests = [], snackSlots = [];
 
   async function loadData() {
     if (!configured) {
