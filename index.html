@@ -80,8 +80,8 @@
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
   // Vul hier jullie Supabase Project URL en Publishable key in.
-  const SUPABASE_URL = "VUL_HIER_JULLIE_PROJECT_URL_IN";
-  const SUPABASE_ANON_KEY = "VUL_HIER_JULLIE_PUBLISHABLE_KEY_IN";
+  const SUPABASE_URL = "https://tsvyyrsphchppxrcjjpl.supabase.co";
+  const SUPABASE_ANON_KEY = "sb_publishable_UGBj69tIRACNFRhEmYfO4Q_GKkX1w7y";
   const configured = !SUPABASE_URL.includes("VUL_HIER") && !SUPABASE_ANON_KEY.includes("VUL_HIER");
   const client = configured ? window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY) : null;
   const $ = id => document.getElementById(id);
