@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="nl">
 <head>
@@ -27,12 +28,10 @@ body{
   color:#fff9ed;
   font-family:Montserrat,Arial,sans-serif;
   line-height:1.65;
-  background:
-    radial-gradient(ellipse at 50% 0%,#392a13 0%,#100e0a 42%,#030303 100%);
+  background:radial-gradient(ellipse at 50% 0%,#392a13 0%,#100e0a 42%,#030303 100%);
   overflow-x:hidden;
 }
 
-/* Gouden fonkelingen over de hele website */
 body:before{
   content:"";
   position:fixed;
@@ -129,7 +128,6 @@ h1{
   background-clip:text;
   -webkit-text-fill-color:transparent;
   filter:drop-shadow(0 5px 10px #000);
-  text-shadow:none;
 }
 
 h1 span{
@@ -166,14 +164,10 @@ section{
   position:relative;
   margin:38px 0;
   padding:clamp(25px,5vw,52px);
-  background:
-    linear-gradient(145deg,rgba(34,28,19,.97),rgba(9,9,8,.98));
+  background:linear-gradient(145deg,rgba(34,28,19,.97),rgba(9,9,8,.98));
   border:1px solid rgba(216,173,85,.65);
   border-radius:12px;
-  box-shadow:
-    0 20px 60px #000b,
-    inset 0 0 30px rgba(216,173,85,.055),
-    0 0 18px rgba(216,173,85,.12);
+  box-shadow:0 20px 60px #000b,inset 0 0 30px rgba(216,173,85,.055),0 0 18px rgba(216,173,85,.12);
 }
 
 section:before{
@@ -431,6 +425,62 @@ button:disabled{opacity:.45;cursor:not-allowed;transform:none}
   margin-bottom:8px;
 }
 
+/* Karaoke en verrassing */
+.karaoke-card{
+  max-width:800px;
+  margin:auto;
+  padding:clamp(22px,5vw,42px);
+  text-align:center;
+  border:1px solid #e0b85f;
+  border-radius:12px;
+  background:
+    radial-gradient(ellipse at 50% 0%,#59401d 0%,#21170d 48%,#090807 100%);
+  box-shadow:0 0 35px rgba(216,173,85,.2),inset 0 0 35px #0008;
+}
+
+.karaoke-mic{
+  font-size:clamp(3.5rem,9vw,6rem);
+  line-height:1.2;
+  margin:8px 0 18px;
+  filter:drop-shadow(0 0 16px #e6bd63);
+}
+
+.karaoke-title{
+  color:#fff0b8;
+  font-family:"Cormorant Garamond",Georgia,serif;
+  font-size:clamp(2rem,5vw,3rem);
+  font-weight:700;
+  text-shadow:0 0 18px rgba(216,173,85,.45);
+  letter-spacing:.06em;
+}
+
+.karaoke-subtitle{
+  color:#e9c879;
+  text-transform:uppercase;
+  letter-spacing:.16em;
+  font-size:.82rem;
+  font-weight:700;
+  margin:14px 0 20px;
+}
+
+.karaoke-text{
+  max-width:600px;
+  margin:0 auto;
+  color:#fff3d7;
+}
+
+.karaoke-surprise{
+  margin:25px auto 0;
+  padding:18px;
+  max-width:550px;
+  border-top:1px solid #b58b43;
+  border-bottom:1px solid #b58b43;
+  color:#ffe9ae;
+  font-family:"Cormorant Garamond",Georgia,serif;
+  font-size:1.5rem;
+  text-shadow:0 0 14px #d8ad55;
+}
+
 footer{
   text-align:center;
   padding:38px 15px;
@@ -563,6 +613,45 @@ footer{
     </select>
     <button id="reserveBtn" type="button">✦ Mijn selectie reserveren ✦</button>
     <div class="status" id="snackStatus" aria-live="polite"></div>
+  </div>
+</section>
+
+<!-- NIEUWE SECTIE: KARAOKE & SURPRISE -->
+<section>
+  <h2>Een avond vol verrassingen</h2>
+  <div class="goldline"></div>
+
+  <div class="karaoke-card">
+    <div class="karaoke-mic">🎤</div>
+
+    <div class="karaoke-title">KARAOKE & SURPRISE</div>
+
+    <div class="karaoke-subtitle">
+      ✦ Pak die microfoon en steel de show! ✦
+    </div>
+
+    <div class="karaoke-text">
+      <p>
+        Tijd om de sterren van de avond te ontdekken!
+        Zing mee, laat je horen en maak er samen een onvergetelijk feest van.
+      </p>
+
+      <p>
+        Of je nu de sterren van de hemel zingt of vooral voor de gezelligheid
+        meedoet: de microfoon staat voor je klaar!
+      </p>
+    </div>
+
+    <div class="karaoke-surprise">
+      ✨ En er is nog een verrassing... ✨
+      <p style="font-family:Montserrat,Arial,sans-serif;font-size:.85rem;letter-spacing:.05em;margin:10px 0 0">
+        Wat het is? Dat houden we nog even geheim! 🤫
+      </p>
+    </div>
+
+    <div style="font-size:2rem;margin-top:22px;color:#ffe9ae">
+      🎶 ✦ 🎤 ✦ 🎶
+    </div>
   </div>
 </section>
 
